@@ -20,10 +20,8 @@ class Search extends Component {
 
   handlerButton = async () => {
     const { inputArtist } = this.state;
-    console.log(inputArtist);
     this.setState({ loading: true });
     const response = await searchAlbumsAPI(inputArtist);
-    console.log(response);
     this.setState({ loading: false,
       searchedArtist: inputArtist,
       searchedArtistAlbuns: response,
