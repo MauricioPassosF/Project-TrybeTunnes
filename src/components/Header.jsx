@@ -20,7 +20,7 @@ class Header extends Component {
           userName ? (
             <>
               <h1>TrybeTunes</h1>
-              <h3 data-testid="header-user-name">{userName}</h3>
+              <h2 data-testid="header-user-name">{userName}</h2>
               <Link to="/search" data-testid="link-to-search">Search</Link>
               <Link to="/favorites" data-testid="link-to-favorites">Favorites</Link>
               <Link to="/profile" data-testid="link-to-profile">Profile</Link>

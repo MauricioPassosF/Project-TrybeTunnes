@@ -75,8 +75,8 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  history: PropTypes.shape.isRequired,
-};
+Login.propTypes = ({
+  history: PropTypes.shape({}),
+}).isRequired;
 
 export default Login;
