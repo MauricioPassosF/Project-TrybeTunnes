@@ -1,19 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, removeSong } from '../services/favoriteSongsAPI';
 
 class MusicCard extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   const { favorite } = this.props;
-  //   console.log(this.props);
-  //   this.state = {
-  //     isFavorite: favorite,
-  //     loading: false,
-  //     // teste: false,
-  //   };
-  // }
-
   state = {
     isFavorite: false,
     loading: false,
@@ -38,23 +27,22 @@ class MusicCard extends Component {
   //   });
   // }
 
-  helperHandler = async (musicInfo) => {
-    await addSong(musicInfo);
+  handlerHelper = async (musicInfo, checked) => {
+    if (checked) {
+      await addSong(musicInfo);
+    } else {
+      await removeSong(musicInfo);
+    }
     this.setState({
       loading: false });
   };
 
   handlerInput = ({ target }, musicInfo) => {
     const { name, checked } = target;
-    if (checked) {
-      this.setState({
-        [name]: checked,
-        loading: true,
-      }, () => this.helperHandler(musicInfo));
-    } else {
-      this.setState({
-        [name]: checked });
-    }
+    this.setState({
+      [name]: checked,
+      loading: true,
+    }, () => this.handlerHelper(musicInfo, checked));
   };
 
   render() {
