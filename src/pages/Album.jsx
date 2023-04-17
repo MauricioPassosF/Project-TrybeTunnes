@@ -53,6 +53,7 @@ class Album extends Component {
               // .filter((e, index) => (index === 0))
               .map((musicInfo, index) => (
                 <MusicCard
+                  fatherPage="album"
                   key={ index }
                   musicInfo={ musicInfo }
                   favorite={ favoritesSongs

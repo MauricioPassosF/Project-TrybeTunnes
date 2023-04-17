@@ -3,15 +3,24 @@ import PropTypes from 'prop-types';
 import { addSong, removeSong } from '../services/favoriteSongsAPI';
 
 class MusicCard extends Component {
-  state = {
-    isFavorite: false,
-    loading: false,
-  };
+  constructor(props) {
+    super(props);
+    const { favorite } = this.props;
+    this.state = {
+      isFavorite: favorite,
+      loading: false,
+    };
+  }
+
+  // state = {
+  //   isFavorite: false,
+  //   loading: false,
+  // };
 
   componentDidUpdate(previuousProps) {
     const { favorite } = this.props;
-    console.log('favorte', favorite);
-    console.log('previousProps', previuousProps.favorite);
+    // console.log('favorte', favorite);
+    // console.log('previousProps', previuousProps.favorite);
     if (favorite !== previuousProps.favorite) {
       this.setState({
         isFavorite: favorite,
@@ -37,20 +46,26 @@ class MusicCard extends Component {
       loading: false });
   };
 
-  handlerInput = ({ target }, musicInfo) => {
+  handlerInput = async ({ target }, musicInfo) => {
     const { name, checked } = target;
+    const { updateFavorite, fatherPage } = this.props;
     this.setState({
       [name]: checked,
       loading: true,
     }, () => this.handlerHelper(musicInfo, checked));
+    if (fatherPage === 'favorites') {
+      console.log('antes de atualizar');
+      await updateFavorite();
+      console.log('depois de atualizar');
+    }
   };
 
   render() {
-    const { musicInfo, favorite } = this.props;
+    const { musicInfo } = this.props;
     const { trackName, previewUrl, trackId } = musicInfo;
     const { isFavorite, loading } = this.state;
-    console.log('render isFavorite', isFavorite);
-    console.log('render favorite', favorite);
+    // console.log('render isFavorite', isFavorite);
+    // console.log('render favorite', favorite);
     return (
       <div>
         {loading ? (
