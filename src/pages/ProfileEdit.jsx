@@ -24,10 +24,7 @@ class ProfileEdit extends Component {
     }, () => this.buttonValidation());
   }
 
-  verifyFilling = (text) => {
-    console.log(text !== '');
-    return text !== '';
-  };
+  verifyFilling = (text) => (text !== '');
 
   verifyAllFilling = () => {
     console.log('oi');
